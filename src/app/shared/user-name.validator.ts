@@ -4,6 +4,8 @@ import { AbstractControl } from "@angular/forms";
 //   const forbidden = /admin/.test(control.value)
 //   return forbidden ? { 'forbiddenName': {value: control.value}} : null;
 // }
+
+//userName field validation
 export function forbidderNameValidator(forbiddenName: RegExp){
 return (control: AbstractControl) => {
     const forbidden = forbiddenName.test(control.value)
