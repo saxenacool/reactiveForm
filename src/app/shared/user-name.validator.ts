@@ -13,6 +13,7 @@ return (control: AbstractControl) => {
   }
 }
 
+//password validation
 export function passwordValidator(control: AbstractControl){
     const password = control.get('password');
     const confirmPassword = control.get('confirmPassword');
