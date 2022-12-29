@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <h2>Reactive Form</h2>
-  {{registrationForm.value | json}}
+  <!-- {{registrationForm.value | json}} -->
   <form [formGroup]="registrationForm">
 
     <div class="form-group">
@@ -19,7 +19,11 @@
       <button class="btn btn-success btn-sm m-2" type="button" (click)="addAlternateEmail()">Add Email</button>
       <button class="btn btn-danger btn-sm" type="button" (click)="removeEmail()">Remove Email</button>
       <input [class.is-invalid]="email?.invalid && email?.touched" type="email" formControlName="email" class="form-control">
-      <small [class.d-none]="email?.valid || email?.untouched" class="text-danger">Email is required</small>
+      <!-- <small [class.d-none]="email?.valid || email?.untouched" class="text-danger">Email is required</small> -->
+      <div *ngIf="email?.invalid && email?.touched">
+      <small *ngIf="email?.errors?.['required']" class="text-danger">Email is required</small>
+      <small *ngIf="email?.errors?.['invalid_email']" class="text-danger">{{email?.errors?.['invalid_email']}}</small>
+      </div>
       <div formArrayName="alternateEmails" *ngFor="let email of alternateEmails.controls; let i =index">
         <input type="email" class="form-control my-1" [formControlName]=i>
       </div>

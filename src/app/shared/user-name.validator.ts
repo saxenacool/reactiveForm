@@ -13,7 +13,22 @@ return (control: AbstractControl) => {
   }
 }
 
-//password validation
+  // Email form control validator function
+  export function emailValidator () {
+    return (control: AbstractControl) => {
+      const name = control.value;
+      const regex =
+        /^([a-z0-9_\-\.]+)@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/;
+      if (name && !regex.test(name)) {
+        return {
+          invalid_email: 'Invalid E-mail',
+        };
+      }
+      return null;
+    };
+  };
+
+//password fields validation
 export function passwordValidator(control: AbstractControl){
     const password = control.get('password');
     const confirmPassword = control.get('confirmPassword');

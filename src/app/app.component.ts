@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormArray, FormGroup, Validators } from '@angular/forms';
-import { forbidderNameValidator, passwordValidator } from './shared/user-name.validator';
+import { emailValidator, forbidderNameValidator, passwordValidator } from './shared/user-name.validator';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.registrationForm = this.fb.group({
       userName: ['', [Validators.required, Validators.minLength(3), forbidderNameValidator(/password/)]],
-      email: [''],
+      email: ['', [emailValidator()]],
       subscribe: [false],
       password : [''],
       confirmPassword : [''],
@@ -28,7 +28,8 @@ export class AppComponent implements OnInit {
     this.registrationForm.get('subscribe')?.valueChanges.subscribe(checkedValue=> {
       const email = this.registrationForm.get('email');
       if(checkedValue){
-        email?.setValidators(Validators.required);
+        email?.setValidators([Validators.required, emailValidator()]);
+       // email?.setValidators(emailValidator());
       }else{
         email?.clearValidators();
       }
@@ -75,8 +76,8 @@ export class AppComponent implements OnInit {
 // })
 
 onClick(){
-  console.log(this.registrationForm);
-  console.log(this.registrationForm.get('userName')?.invalid)
+ // console.log(this.registrationForm.value);
+  console.log(this.registrationForm.get('email'))
 }
 
 loadData(){
